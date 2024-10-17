@@ -18,3 +18,4 @@
 - Sonarqube Scanner
 - Maven
 - OWASP Dependency Check
+- Eclipse Temurin Installer
