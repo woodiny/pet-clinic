@@ -6,7 +6,11 @@ pipeline {
         maven 'maven3'
     }
     
-     stages{
+    environment {
+        SCANNER_HOME=tool 'sonar-scanner'
+    }
+    
+    stages{
         
         stage("Git Checkout"){
             steps{
@@ -25,5 +29,5 @@ pipeline {
                 sh "mvn test"
             }
         }
-     }
+    }
 }
