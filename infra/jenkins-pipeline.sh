@@ -6,12 +6,11 @@ pipeline {
         maven 'maven3'
     }
     
-    environment {
+     environment {
         SCANNER_HOME=tool 'sonar-scanner'
     }
-    
+
     stages{
-        
         stage("Git Checkout"){
             steps{
                 git branch: 'main', changelog: false, poll: false, url: 'https://github.com/writetoritika/Petclinic.git'
@@ -36,8 +35,23 @@ pipeline {
                     sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=Petclinic \
                     -Dsonar.java.binaries=. \
                     -Dsonar.projectKey=Petclinic '''
+    
                 }
             }
         }
+        
+        stage("Build"){
+            steps{
+                sh " mvn clean install"
+            }
+        }
+        
+        stage("OWASP Dependency Check"){
+            steps{
+                dependencyCheck additionalArguments: '--scan ./ ' , odcInstallation: 'DP-Check'
+                dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+            }
+        }
+        
     }
 }
