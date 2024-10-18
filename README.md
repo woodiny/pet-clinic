@@ -24,3 +24,9 @@
 - Docker Pipeline
 - Docker API
 - docker-build-step
+
+## Result
+
+![](/img/jenkins-pipeline.png)
+
+![](/img/sonarqube.png)
