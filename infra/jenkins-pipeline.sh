@@ -56,12 +56,18 @@ pipeline {
         stage("Docker Build & Push"){
             steps{
                 script{
-                   withDockerRegistry(credentialsId: '2dfbd6e2-8403-4745-9a33-feb1c7016f35', toolName: 'docker') {
+                   withDockerRegistry(credentialsId: '727f00aa-6ffd-455e-85d7-56b3e290983d', toolName: 'docker') {
                         sh "docker build -t petclinic1 ."
-                        sh "docker tag petclinic1 writetoritika/pet-clinic123:latest"
-                        sh "docker push writetoritika/pet-clinic123:latest"
+                        sh "docker tag petclinic1 woodiny/pet-clinic123:latest"
+                        sh "docker push woodiny/pet-clinic123:latest"
                     }
                 }
+            }
+        }
+
+        stage("Deploy Using Docker"){
+            steps{
+                sh " docker run -d --name pet1 -p 8082:8082 woodiny/pet-clinic123:latest "
             }
         }
         
