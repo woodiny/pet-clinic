@@ -52,6 +52,18 @@ pipeline {
                 dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
             }
         }
+
+        stage("Docker Build & Push"){
+            steps{
+                script{
+                   withDockerRegistry(credentialsId: '2dfbd6e2-8403-4745-9a33-feb1c7016f35', toolName: 'docker') {
+                        sh "docker build -t petclinic1 ."
+                        sh "docker tag petclinic1 writetoritika/pet-clinic123:latest"
+                        sh "docker push writetoritika/pet-clinic123:latest"
+                    }
+                }
+            }
+        }
         
     }
 }

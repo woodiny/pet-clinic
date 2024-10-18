@@ -19,3 +19,8 @@
 - Maven
 - OWASP Dependency Check
 - Eclipse Temurin Installer
+- Docker
+- Docker Commons
+- Docker Pipeline
+- Docker API
+- docker-build-step
