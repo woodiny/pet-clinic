@@ -70,6 +70,12 @@ pipeline {
                 sh " docker run -d --name pet1 -p 8082:8082 woodiny/pet-clinic123:latest "
             }
         }
+
+        stage("Deploy To Tomcat"){
+            steps{
+                sh "cp  /var/lib/jenkins/workspace/Real-World-CI-CD/target/petclinic.war /opt/apache-tomcat-9.0.65/webapps/ "
+            }
+        }
         
     }
 }
